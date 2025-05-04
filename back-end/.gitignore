@@ -1,12 +1,9 @@
 # Node modules
 node_modules/
 
-# TypeScript build output
+# TypeScript
 dist/
 build/
-*.js
-*.js.map
-*.d.ts
 
 # Logs
 logs/
@@ -20,18 +17,12 @@ pnpm-debug.log*
 .env
 .env.*.local
 
-# OS-specific files
-.DS_Store
-Thumbs.db
-
-# Editor-specific
+# Code editor
 .vscode/
 .idea/
 
-# TypeORM CLI cache (if you use migrations or schema sync)
+# TypeORM CLI cache & migrations (if you use migrations or schema sync)
 typeorm-cache/
-
-# Optional: compiled migration files (if using `ts-node` or build process)
-**/migration/*.js
-**/migration/*.js.map
-``
+migrations
+**/migration/*.ts
+**/migration/*.ts.map
