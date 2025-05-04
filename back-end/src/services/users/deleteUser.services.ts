@@ -3,10 +3,10 @@ import { AppDataSource } from "../../data-source";
 import { User } from "../../entities/user.entity";
 import { AppError } from "../../errors/appError";
 
-async function deleteUserService(id: string): Promise<string> {
+async function deleteUserService(userId: string): Promise<string> {
   const userRepository = AppDataSource.getRepository(User);
 
-  const deletedUser = await userRepository.findOneBy({ id });
+  const deletedUser = await userRepository.findOneBy({ id: userId });
 
   if (!deletedUser) throw new AppError(404, "This user does not exists");
 

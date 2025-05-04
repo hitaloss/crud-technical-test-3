@@ -3,9 +3,9 @@ import { Request, Response } from "express";
 import deleteUserService from "../../services/users/deleteUser.services";
 
 async function deleteUserController(request: Request, response: Response) {
-  const id = request.user.userId;
+  const userId = request.params.id;
 
-  const deletedUser = await deleteUserService(id);
+  const deletedUser = await deleteUserService(userId);
 
   return response
     .status(204)
