@@ -1,4 +1,4 @@
-import { AppDataSource } from "../../data-source";
+import AppDataSource from "../../data-source";
 import { hash } from "bcrypt";
 
 import { User } from "../../entities/user.entity";
@@ -7,6 +7,8 @@ import { IUser } from "../../interfaces/user/user";
 
 async function createUserService({ username, password }: IUser): Promise<User> {
   const userRepository = AppDataSource.getRepository(User);
+
+  if (!username || !password) throw new AppError(403, "Missing body params");
 
   const user = await userRepository.findOne({ where: { username: username } });
 

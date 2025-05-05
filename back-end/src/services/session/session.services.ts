@@ -1,4 +1,4 @@
-import { AppDataSource } from "../../data-source";
+import AppDataSource from "../../data-source";
 import { compare } from "bcrypt";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
@@ -12,6 +12,8 @@ async function sessionService({
   password,
 }: ISessionCreate): Promise<string> {
   const userRepository = AppDataSource.getRepository(User);
+
+  if (!username || !password) throw new AppError(403, "Missing body params");
 
   const user = await userRepository.findOne({
     where: {

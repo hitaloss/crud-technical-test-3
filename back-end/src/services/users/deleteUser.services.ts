@@ -1,10 +1,12 @@
-import { AppDataSource } from "../../data-source";
+import AppDataSource from "../../data-source";
 
 import { User } from "../../entities/user.entity";
 import { AppError } from "../../errors/appError";
 
 async function deleteUserService(userId: string): Promise<string> {
   const userRepository = AppDataSource.getRepository(User);
+
+  if (!userId) throw new AppError(403, "Missing id param");
 
   const deletedUser = await userRepository.findOneBy({ id: userId });
 

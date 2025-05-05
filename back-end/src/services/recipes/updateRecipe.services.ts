@@ -1,4 +1,4 @@
-import { AppDataSource } from "../../data-source";
+import AppDataSource from "../../data-source";
 
 import { Recipe } from "../../entities/recipe.entity";
 import { AppError } from "../../errors/appError";
@@ -14,11 +14,12 @@ async function updateRecipeService(
 
   if (!recipe) throw new AppError(404, "Recipe not found");
 
-  if (flavor !== "Doce" && flavor !== "Salgado") {
+  if (flavor && flavor !== "Doce" && flavor !== "Salgado") {
     throw new AppError(400, 'Flavor must be "Doce" or "Salgado"');
   }
 
   if (
+    complexity &&
     complexity !== "Fácil" &&
     complexity !== "Médio" &&
     complexity !== "Difícil"
