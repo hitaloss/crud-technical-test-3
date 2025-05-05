@@ -1,8 +1,8 @@
-import { Response } from "express";
+import { Request, Response } from "express";
 
 import readRecipesServices from "../../services/recipes/readRecipes.services";
 
-async function readRecipesController(response: Response) {
+async function readRecipesController(_: Request, response: Response) {
   const recipes = await readRecipesServices();
   return response
     .status(200)
