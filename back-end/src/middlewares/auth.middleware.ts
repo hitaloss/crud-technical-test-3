@@ -18,9 +18,6 @@ function authMiddleware(
     process.env.SECRET_KEY as string,
     (error: any, decoded: any) => {
       if (error) throw new AppError(403, "Invalid token");
-      if (request.user.userId && request.user.userId !== decoded.sub) {
-        throw new AppError(401, "You do not have permission for this action.");
-      }
 
       request.user = {
         userId: decoded.sub,
