@@ -1,4 +1,5 @@
-import { AppDataSource } from "../../data-source";
+import AppDataSource from "../../data-source";
+import { Ingredients } from "../../entities/ingredients.entity";
 
 import { Recipe } from "../../entities/recipe.entity";
 import { AppError } from "../../errors/appError";
@@ -9,8 +10,14 @@ async function createRecipeService({
   imageUrl,
   flavor,
   complexity,
+  ingredients,
 }: IRecipeCreate): Promise<Recipe> {
   const recipeRepository = AppDataSource.getRepository(Recipe);
+  const ingredientsRepository = AppDataSource.getRepository(Ingredients);
+
+  if (!title || !imageUrl || !flavor || !complexity) {
+    throw new AppError(403, "Missing body params");
+  }
 
   if (flavor !== "Doce" && flavor !== "Salgado") {
     throw new AppError(400, 'Flavor must be "Doce" or "Salgado"');
@@ -29,6 +36,12 @@ async function createRecipeService({
     image_url: imageUrl,
     flavor,
     complexity,
+    ingredients: ingredients.map((ingredient) =>
+      ingredientsRepository.create({
+        name: ingredient.name,
+        quantity: ingredient.quantity,
+      })
+    ),
   });
 
   await recipeRepository.save(newRecipe);
