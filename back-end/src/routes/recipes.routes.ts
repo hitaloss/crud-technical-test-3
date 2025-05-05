@@ -11,7 +11,7 @@ const routes = Router();
 export function recipeRoutes() {
   routes.post("", authMiddleware, createRecipeController);
   routes.get("", authMiddleware, readRecipesController);
-  routes.patch("", authMiddleware, updateRecipeController);
-  routes.delete("", authMiddleware, deleteRecipeController);
+  routes.patch("/:id", authMiddleware, updateRecipeController);
+  routes.delete("/:id", authMiddleware, deleteRecipeController);
   return routes;
 }

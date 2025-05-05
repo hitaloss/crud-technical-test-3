@@ -7,6 +7,6 @@ const routes = Router();
 
 export function usersRouters() {
   routes.post("", createUserController);
-  routes.delete("", deleteUserController);
+  routes.delete("/:id", deleteUserController);
   return routes;
 }
