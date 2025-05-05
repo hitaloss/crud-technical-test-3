@@ -14,7 +14,7 @@ export class Ingredients {
   @Column({ nullable: true })
   quantity?: string;
 
-  @ManyToOne(() => Recipe, (recipe) => recipe.ingredients, {
+  @ManyToOne(() => Recipe, {
     onDelete: "CASCADE",
   })
   recipe: Recipe;
